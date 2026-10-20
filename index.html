@@ -1,0 +1,589 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>영어 한입 PRO | Advanced Grammar Lab</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --navy:#172b4d;
+  --blue:#3569d4;
+  --pale:#edf3ff;
+  --green:#16845b;
+  --red:#c74343;
+  --gold:#e9ae42;
+  --ink:#26364a;
+  --muted:#758397;
+  --line:#e5eaf2;
+  --bg:#f5f7fb;
+}
+* { box-sizing:border-box; }
+body {
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:'Noto Sans KR',sans-serif; line-height:1.75;
+}
+button,textarea { font:inherit; }
+button { cursor:pointer; }
+button:focus-visible,textarea:focus-visible {
+  outline:3px solid #e9ae42; outline-offset:3px;
+}
+.app { max-width:850px; padding:20px 16px 50px; margin:auto; }
+header {
+  display:flex; justify-content:space-between; align-items:center;
+  gap:12px; margin-bottom:22px;
+}
+.logo { font:26px 'Jua',sans-serif; color:var(--navy); }
+.logo small { display:block; font:11px 'Noto Sans KR',sans-serif; color:var(--muted); }
+.level {
+  background:var(--navy); color:white; padding:7px 12px;
+  border-radius:10px; font-size:12px; font-weight:700;
+}
+.hero {
+  border-radius:25px; padding:27px; color:white;
+  background:linear-gradient(125deg,#172b4d,#3569d4);
+  position:relative; overflow:hidden; margin-bottom:20px;
+}
+.hero:after {
+  content:"✦"; position:absolute; right:25px; top:-35px;
+  font-size:150px; color:#ffffff12;
+}
+.eyebrow { font-size:11px; letter-spacing:2px; color:#d5e1ff; font-weight:800; }
+.hero h1 { font:32px 'Jua',sans-serif; margin:7px 0; }
+.hero p { margin:0; font-size:14px; color:#e2eaff; max-width:570px; }
+.hero-tags { display:flex; gap:7px; flex-wrap:wrap; margin-top:17px; }
+.hero-tags span {
+  font-size:11px; border:1px solid #ffffff50;
+  border-radius:20px; padding:4px 10px;
+}
+.progress-head {
+  display:flex; justify-content:space-between; font-size:12px;
+  color:var(--muted); margin-bottom:7px;
+}
+.track { height:7px; background:#e2e7ef; border-radius:8px; overflow:hidden; }
+.bar { height:100%; width:0; background:var(--blue); transition:width .25s; }
+.card {
+  background:white; border:1px solid var(--line);
+  border-radius:20px; padding:23px; margin-top:17px;
+  box-shadow:0 4px 15px #1b31500a;
+}
+.section-head {
+  display:flex; align-items:center; gap:10px; margin:0 0 16px;
+  font:23px 'Jua',sans-serif; color:var(--navy);
+}
+.step {
+  width:31px; height:31px; border-radius:10px;
+  background:var(--pale); color:var(--blue);
+  display:inline-flex; justify-content:center; align-items:center;
+  font:15px 'Jua',sans-serif; flex-shrink:0;
+}
+.sub { font-size:12px; color:var(--muted); margin-top:-10px; }
+.reading-title { font:26px 'Jua',sans-serif; margin:0; }
+.reading-sub { color:var(--muted); font-size:12px; margin:3px 0 18px; }
+.passage {
+  background:#f7f9fd; border-left:4px solid var(--blue);
+  border-radius:4px 14px 14px 4px; padding:18px 19px;
+  font-size:16px; line-height:2.05;
+}
+.passage p { margin:0 0 12px; }
+.passage p:last-child { margin-bottom:0; }
+.mark {
+  background:#fff0c8; color:#75500b; padding:1px 3px;
+  border-radius:4px; font-weight:800;
+}
+.passage-translation {
+  border:1px solid var(--line); border-radius:12px;
+  padding:12px 15px; margin-top:13px;
+}
+summary { cursor:pointer; color:var(--blue); font-weight:700; font-size:13px; }
+.passage-translation p { font-size:13px; margin-bottom:0; }
+.vocab { display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; }
+.vocab span {
+  background:#f0f4fa; border-radius:9px; padding:5px 9px;
+  font-size:12px;
+}
+.vocab b { color:var(--blue); }
+.note {
+  background:#fff7e5; border:1px solid #f5e5b8;
+  padding:13px 15px; border-radius:13px; font-size:13px; margin-top:15px;
+}
+.rule {
+  border:1px solid var(--line); border-radius:15px;
+  padding:16px; margin:12px 0;
+}
+.rule h3 { font-size:15px; margin:0 0 8px; }
+.formula {
+  background:var(--pale); border-radius:10px; padding:12px;
+  text-align:center; color:var(--navy); font-weight:800;
+  font-size:14px; margin:10px 0;
+}
+.example {
+  border-bottom:1px dashed var(--line); padding:10px 0;
+}
+.example:last-child { border-bottom:0; }
+.en { font-weight:700; }
+.ko { color:var(--muted); font-size:13px; }
+.tag {
+  font-size:10px; background:#e5edff; color:#315db0;
+  border-radius:5px; padding:3px 6px; font-weight:800;
+}
+.question {
+  border:1px solid var(--line); border-radius:15px;
+  padding:16px; margin:14px 0;
+}
+.q-title { font-weight:800; margin-bottom:9px; }
+.q-type { font-size:10px; color:var(--blue); font-weight:800; margin-bottom:5px; }
+.options { display:grid; gap:8px; }
+.option {
+  background:white; color:var(--ink); border:1px solid #dfe6f0;
+  padding:10px 12px; border-radius:10px; text-align:left;
+  font-size:14px;
+}
+.option:hover:not(:disabled) { background:var(--pale); border-color:#9ab4ee; }
+.option.selected { background:var(--pale); border:2px solid var(--blue); padding:9px 11px; }
+.option.correct { background:#e7f8ee; border-color:#42a477; }
+.option.wrong { background:#fff0f0; border-color:#dc8a8a; }
+.option:disabled { cursor:default; }
+.feedback { font-size:13px; margin-top:10px; padding:10px; border-radius:9px; }
+.feedback.good { color:#176b48; background:#e9f7ef; }
+.feedback.bad { color:#a33535; background:#fff0f0; }
+textarea {
+  display:block; width:100%; min-height:95px; resize:vertical;
+  border:1px solid #dfe6f0; border-radius:12px;
+  padding:12px; color:var(--ink); background:#fbfcff;
+}
+textarea::placeholder { color:#9ba6b5; }
+.primary {
+  background:var(--blue); color:white; border:0;
+  border-radius:12px; padding:12px 16px; font-weight:800; width:100%;
+}
+.primary:hover { background:#2855b4; }
+.primary:disabled { background:#aab8d0; cursor:not-allowed; }
+.secondary {
+  background:white; border:1px solid #cfd9e8; color:var(--navy);
+  border-radius:11px; padding:10px 14px; font-weight:700;
+}
+.row { display:flex; gap:10px; margin-top:14px; }
+.row > * { flex:1; }
+.result {
+  display:none; text-align:center; padding:20px; border-radius:16px;
+  background:#edf4ff; margin-top:16px;
+}
+.result .big { font:40px 'Jua',sans-serif; }
+.result h3 { font:25px 'Jua',sans-serif; margin:0; color:var(--navy); }
+.result p { font-size:13px; }
+.result-detail { text-align:left; font-size:13px; margin:15px 0; }
+.result-detail div { padding:5px 0; }
+.model-answer {
+  display:none; background:#e9f7ef; border-radius:12px;
+  padding:14px; font-size:13px; margin-top:12px;
+}
+.checkline { font-size:13px; color:var(--muted); margin:10px 0; }
+footer { text-align:center; font-size:11px; color:#98a2b0; margin-top:28px; }
+@media(max-width:520px) {
+  .app { padding:14px 11px 35px; }
+  .hero { padding:22px 18px; }
+  .hero h1 { font-size:27px; }
+  .card { padding:17px; }
+  .passage { padding:14px; font-size:14px; }
+  .section-head { font-size:21px; }
+}
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+  <div class="logo">📘 영어 한입 PRO<small>Advanced Grammar & Reading Lab</small></div>
+  <div class="level">LEVEL UP · 심화</div>
+</header>
+
+<section class="hero">
+  <div class="eyebrow">TODAY'S CHALLENGE · 01</div>
+  <h1>Read deeper.<br>Think smarter.</h1>
+  <p>영어를 읽는 데서 멈추지 말고, 문장의 구조와 의미를 분석해 보세요.</p>
+  <div class="hero-tags">
+    <span>독해력</span><span>문법 분석</span><span>오류 수정</span><span>서술형 영작</span>
+  </div>
+</section>
+
+<div class="progress-head">
+  <span id="progressLabel">학습 진행 · 4단계</span>
+  <span id="progressPct">0% 완료</span>
+</div>
+<div class="track"><div class="bar" id="progressBar"></div></div>
+
+<section class="card" id="reading">
+  <h2 class="section-head"><span class="step">01</span> 고난도 지문 독해</h2>
+  <h3 class="reading-title">The Power of Small Actions</h3>
+  <div class="reading-sub">환경 · 지속 가능한 생활 · 약 2~3분</div>
+  <div class="passage">
+    <p>Many people believe that protecting the environment requires major changes, such as building new technologies or creating strict laws. However, small actions can also make a meaningful difference.</p>
+    <p>Consider a reusable water bottle, <span class="mark">which reduces the need for single-use plastic bottles</span>. Although one bottle may seem insignificant, millions of people using reusable bottles can prevent enormous amounts of plastic waste.</p>
+    <p>Another effective strategy is to use public transportation. People <span class="mark">who choose buses or trains instead of private cars</span> can help reduce air pollution. By sharing transportation, they also reduce the number of vehicles on the road.</p>
+    <p>These examples show that environmental protection does not always depend on dramatic changes. <span class="mark">What matters most is whether people turn good intentions into consistent actions.</span> Small choices, when repeated by many people, can create a lasting impact.</p>
+  </div>
+  <details class="passage-translation">
+    <summary>🇰🇷 전체 해석 확인하기</summary>
+    <p>많은 사람들은 환경을 보호하려면 새로운 기술을 개발하거나 엄격한 법률을 만드는 것과 같은 큰 변화가 필요하다고 생각한다. 그러나 작은 행동도 의미 있는 차이를 만들어 낼 수 있다.</p>
+    <p>일회용 플라스틱병의 필요성을 줄여 주는 재사용 물병을 생각해 보자. 물병 하나는 중요하지 않아 보일 수 있지만, 수백만 명이 재사용 물병을 사용하면 엄청난 양의 플라스틱 쓰레기를 막을 수 있다.</p>
+    <p>또 다른 효과적인 전략은 대중교통을 이용하는 것이다. 자가용 대신 버스나 기차를 선택하는 사람들은 대기 오염을 줄이는 데 도움을 줄 수 있다. 교통수단을 함께 이용함으로써 도로 위 차량의 수도 줄일 수 있다.</p>
+    <p>이러한 사례는 환경 보호가 항상 극적인 변화에 달려 있는 것은 아니라는 점을 보여 준다. 가장 중요한 것은 사람들이 좋은 의도를 꾸준한 행동으로 옮기는지 여부이다. 많은 사람이 작은 선택을 반복하면 지속적인 영향을 만들어 낼 수 있다.</p>
+  </details>
+  <div class="vocab">
+    <span><b>meaningful</b> 의미 있는</span>
+    <span><b>insignificant</b> 중요하지 않은</span>
+    <span><b>enormous</b> 엄청난</span>
+    <span><b>consistent</b> 꾸준한</span>
+    <span><b>lasting impact</b> 지속적인 영향</span>
+  </div>
+  <div class="note">🔎 <b>독해 미션:</b> 글의 중심 생각은 무엇인가요? 표시된 문장에서 관계대명사와 명사절의 구조도 찾아보세요.</div>
+  <div class="row">
+    <button class="secondary" onclick="markStep('read')">독해 완료 ✓</button>
+    <button class="secondary" onclick="document.getElementById('grammar').scrollIntoView({behavior:'smooth'})">문법 분석 ↓</button>
+  </div>
+</section>
+
+<section class="card" id="grammar">
+  <h2 class="section-head"><span class="step">02</span> 문법 심층 분석</h2>
+  <p class="sub">핵심 문법 ① 관계대명사 · ② 분사구문 · ③ 명사절</p>
+
+  <div class="rule">
+    <h3>① 관계대명사: 앞의 명사를 구체적으로 설명하기</h3>
+    <div class="formula">선행사 + 관계대명사 + 불완전한 절</div>
+    <div class="example">
+      <div class="en">a water bottle <span style="color:#3569d4">which reduces</span> plastic waste</div>
+      <div class="ko">플라스틱 쓰레기를 줄이는 물병</div>
+    </div>
+    <p>which는 앞의 사물인 a water bottle을 가리키며, 뒤 절에서 주어 역할을 합니다. 따라서 which reduces는 주어와 동사가 모두 있는 절이지만, 주어 자리를 관계대명사가 담당합니다.</p>
+    <div class="example">
+      <div class="en">People <span style="color:#3569d4">who choose buses or trains</span> can help.</div>
+      <div class="ko">버스나 기차를 선택하는 사람들은 도움을 줄 수 있다.</div>
+    </div>
+    <p>who는 사람을 선행사로 하며 관계절 안에서 choose의 주어 역할을 합니다.</p>
+  </div>
+
+  <div class="rule">
+    <h3>② 분사구문: 두 내용을 간결하게 연결하기</h3>
+    <div class="formula">접속사 + 주어 + 동사 → V-ing 구문 등으로 축약 가능</div>
+    <div class="example">
+      <div class="en">By <span style="color:#3569d4">sharing</span> transportation, they reduce pollution.</div>
+      <div class="ko">교통수단을 함께 이용함으로써 그들은 오염을 줄인다.</div>
+    </div>
+    <p>by + 동명사는 '~함으로써'라는 방법을 나타냅니다. 여기서 sharing은 분사구문이 아니라 전치사 by의 목적어인 동명사입니다.</p>
+    <div class="example">
+      <div class="en"><span style="color:#3569d4">Using public transportation</span>, people can reduce emissions.</div>
+      <div class="ko">대중교통을 이용하면 사람들은 배출량을 줄일 수 있다.</div>
+    </div>
+    <p>위 문장은 주절의 주어 people이 대중교통을 이용한다는 의미로 해석할 수 있는 분사구문입니다. 주절과 분사구문의 의미상 주어가 일치하는지 확인하세요.</p>
+  </div>
+
+  <div class="rule">
+    <h3>③ 명사절: 문장 속에서 명사 역할을 하는 절</h3>
+    <div class="formula"><span style="color:#3569d4">What matters most</span> is whether people act.</div>
+    <div class="ko">가장 중요한 것은 사람들이 행동하는지 여부이다.</div>
+    <p><b>What matters most</b>는 '~하는 것'이라는 의미로 문장의 주어 역할을 합니다. what은 선행사를 포함하는 관계대명사로 분석할 수 있습니다.</p>
+    <p><b>whether people act</b>는 '사람들이 행동하는지 여부'라는 뜻의 명사절이며, 주격보어 역할을 합니다.</p>
+  </div>
+
+  <div class="note">⚠️ <b>상위권 체크 포인트:</b> 형태가 비슷하다고 모두 같은 문법은 아닙니다. by sharing의 sharing은 동명사이고, Using public transportation은 문맥상 분사구문으로 쓰였습니다. 문장에서 어떤 역할을 하는지 확인하세요.</div>
+  <button class="primary" onclick="markStep('grammar');document.getElementById('quiz').scrollIntoView({behavior:'smooth'})" style="margin-top:16px">문법 분석 완료 · 고난도 퀴즈 →</button>
+</section>
+
+<section class="card" id="quiz">
+  <h2 class="section-head"><span class="step">03</span> 고난도 문법 퀴즈</h2>
+  <p class="sub">정답을 고른 후 채점하면 문제별 해설을 확인할 수 있습니다.</p>
+  <div id="questions"></div>
+  <button class="primary" id="checkBtn" onclick="checkQuiz()">답안 제출 및 채점</button>
+  <div class="result" id="quizResult" aria-live="polite">
+    <div class="big" id="scoreEmoji">🎯</div>
+    <h3 id="scoreTitle">채점 결과</h3>
+    <p id="scoreText"></p>
+    <div class="result-detail" id="scoreDetail"></div>
+    <button class="secondary" onclick="resetQuiz()">퀴즈 다시 풀기</button>
+  </div>
+</section>
+
+<section class="card" id="writing">
+  <h2 class="section-head"><span class="step">04</span> 서술형 · 문장 변형 챌린지</h2>
+  <p><b>미션 1.</b> 다음 두 문장을 관계대명사를 사용해 한 문장으로 연결하세요.</p>
+  <div class="rule">
+    <div class="en">I know a student.</div>
+    <div class="en">The student uses a reusable bottle.</div>
+    <p class="ko">조건: who를 사용하여 한 문장으로 작성하세요.</p>
+  </div>
+  <textarea id="writing1" placeholder="예: I know a student who ..."></textarea>
+
+  <p style="margin-top:22px"><b>미션 2.</b> 의미를 유지하면서 분사구문을 사용해 문장을 바꿔 보세요.</p>
+  <div class="rule">
+    <div class="en">Because people share cars, they can reduce traffic.</div>
+    <p class="ko">조건: Because절을 분사구문으로 바꾸세요. 주어의 의미가 유지되는지 확인하세요.</p>
+  </div>
+  <textarea id="writing2" placeholder="예: Sharing ..."></textarea>
+
+  <button class="primary" style="margin-top:14px" onclick="showWritingAnswers()">모범 답안 및 해설 보기</button>
+  <div class="model-answer" id="modelAnswers">
+    <b>✏️ 미션 1 모범 답안</b>
+    <p>I know a student who uses a reusable bottle.</p>
+    <p>who uses a reusable bottle이 student를 수식하는 관계절입니다.</p>
+    <hr style="border:0;border-top:1px solid #cce5d4">
+    <b>✏️ 미션 2 모범 답안</b>
+    <p>Sharing cars, people can reduce traffic.</p>
+    <p>두 절의 주어가 모두 people이므로, 분사구문의 의미상 주어와 주절의 주어가 일치합니다. 다만 자연스러운 영어에서는 By sharing cars, people can reduce traffic.처럼 by + 동명사를 사용해 방법을 명확히 나타낼 수도 있습니다.</p>
+    <p><b>스스로 점검하기:</b> 문법 형태뿐 아니라 원래 문장의 의미가 유지되는지 확인하세요.</p>
+  </div>
+  <p class="checkline">서술형 답안은 자동 채점하지 않습니다. 모범 답안과 비교해 문법, 의미, 문장 구조를 직접 점검하세요.</p>
+  <button class="primary" style="background:#16845b" onclick="finishLesson()">학습 완료하기 🏆</button>
+  <div id="finishResult" class="result" aria-live="polite">
+    <div class="big">🏆</div>
+    <h3>오늘의 도전 완료!</h3>
+    <p id="finishText"></p>
+    <p>다음에는 새로운 지문으로 문법 분석에 도전해 보세요.</p>
+  </div>
+</section>
+
+<footer>ENGLISH BITE PRO · Read carefully, think critically, write precisely.</footer>
+</div>
+
+<script>
+const questions = [
+ {
+  type:'글의 중심 내용',
+  q:'1. Which statement best expresses the main idea of the passage?',
+  options:[
+   'Environmental problems can only be solved through new technology.',
+   'Consistent small actions can contribute to environmental protection.',
+   'Public transportation is the only effective way to reduce pollution.',
+   'Individual choices have little influence on environmental problems.'
+  ],
+  answer:1,
+  explain:'글은 재사용 물병과 대중교통을 예로 들며, 많은 사람의 작은 행동이 모이면 지속적인 환경 보호 효과를 낼 수 있다고 주장합니다.',
+  wrong:[
+   '글은 새로운 기술만이 해결책이라고 하지 않습니다.',
+   '',
+   '대중교통은 여러 사례 중 하나일 뿐 유일한 방법이 아닙니다.',
+   '글의 결론은 개인의 작은 선택이 의미 있는 영향을 줄 수 있다는 것입니다.'
+  ]
+ },
+ {
+  type:'관계대명사 분석',
+  q:'2. In “a water bottle, which reduces the need for single-use plastic bottles,” what does which refer to?',
+  options:[
+   'the environment',
+   'the need',
+   'a water bottle',
+   'single-use plastic bottles'
+  ],
+  answer:2,
+  explain:'which는 바로 앞의 선행사 a water bottle을 가리키며 관계절에서 주어 역할을 합니다.',
+  wrong:[
+   'the environment는 which의 직접적인 선행사가 아닙니다.',
+   'the need는 관계절의 의미상 결과와 관련되지만 선행사는 아닙니다.',
+   '',
+   'single-use plastic bottles는 관계절 안에서 reduces의 목적어에 해당하는 내용입니다.'
+  ]
+ },
+ {
+  type:'문법 오류 찾기',
+  q:'3. 다음 중 문법적으로 올바른 문장은?',
+  options:[
+   'People which use buses can reduce pollution.',
+   'A bottle who reduces waste is useful.',
+   'People who chooses buses can reduce pollution.',
+   'People who choose buses can reduce pollution.'
+  ],
+  answer:3,
+  explain:'사람을 선행사로 하는 관계대명사는 who를 사용하며, 선행사 people이 복수이므로 관계절의 동사는 choose가 맞습니다.',
+  wrong:[
+   '사람을 가리킬 때는 일반적으로 who를 사용합니다.',
+   '사물인 bottle을 수식할 때 who를 사용하지 않습니다.',
+   'who의 선행사 people은 복수이므로 chooses가 아니라 choose를 씁니다.',
+   ''
+  ]
+ },
+ {
+  type:'분사구문 분석',
+  q:'4. In “Using public transportation, people can reduce emissions,” who uses public transportation?',
+  options:[
+   'Emissions',
+   'People',
+   'Public transportation',
+   'The sentence does not identify the user.'
+  ],
+  answer:1,
+  explain:'분사구문의 의미상 주어는 일반적으로 주절의 주어와 같습니다. 여기서는 people이 대중교통을 이용합니다.',
+  wrong:[
+   'emissions는 배출량으로, 행동의 주체가 아닙니다.',
+   '',
+   'public transportation은 이용되는 교통수단입니다.',
+   '주절의 주어 people을 통해 행동의 주체를 파악할 수 있습니다.'
+  ]
+ },
+ {
+  type:'명사절 분석',
+  q:'5. In “What matters most is whether people turn good intentions into consistent actions,” what is the function of “whether people turn good intentions into consistent actions”?',
+  options:[
+   'It modifies the noun actions.',
+   'It functions as the subject of the sentence.',
+   'It functions as a subject complement.',
+   'It is a relative clause modifying people.'
+  ],
+  answer:2,
+  explain:'문장의 주어는 What matters most이며, whether로 시작하는 명사절은 be동사 is 뒤에서 주격보어 역할을 합니다.',
+  wrong:[
+   'actions를 수식하는 관계절이 아닙니다.',
+   '문장의 주어는 What matters most입니다.',
+   '',
+   'whether절은 people을 수식하지 않고 명사절로 기능합니다.'
+  ]
+ },
+ {
+  type:'문장 변형',
+  q:'6. Choose the best sentence that combines “I met a girl. She organizes recycling activities.”',
+  options:[
+   'I met a girl which organizes recycling activities.',
+   'I met a girl who organizes recycling activities.',
+   'I met a girl who organize recycling activities.',
+   'I met a girl, she organizes recycling activities.'
+  ],
+  answer:1,
+  explain:'사람을 선행사로 하는 who를 사용하고, 선행사 a girl이 3인칭 단수이므로 동사는 organizes가 맞습니다.',
+  wrong:[
+   '사람을 수식할 때는 who가 적절합니다.',
+   '',
+   'a girl은 3인칭 단수이므로 organize가 아니라 organizes를 사용합니다.',
+   '두 독립절을 쉼표만으로 연결한 문장으로, 이 문맥에서는 관계대명사로 연결하는 것이 적절합니다.'
+  ]
+ }
+];
+
+let answers = Array(questions.length).fill(null);
+let submitted = false;
+const steps = {read:false, grammar:false, quiz:false, finish:false};
+
+function renderQuiz() {
+ const root = document.getElementById('questions');
+ root.innerHTML = '';
+ questions.forEach((q, qi) => {
+  const box = document.createElement('div');
+  box.className = 'question';
+  const type = document.createElement('div');
+  type.className = 'q-type';
+  type.textContent = q.type;
+  box.appendChild(type);
+  const title = document.createElement('div');
+  title.className = 'q-title';
+  title.textContent = q.q;
+  box.appendChild(title);
+  const opts = document.createElement('div');
+  opts.className = 'options';
+  q.options.forEach((opt, oi) => {
+   const btn = document.createElement('button');
+   btn.type = 'button';
+   btn.className = 'option';
+   btn.textContent = String.fromCharCode(65 + oi) + '. ' + opt;
+   if (answers[qi] === oi) btn.classList.add('selected');
+   btn.setAttribute('aria-pressed', answers[qi] === oi ? 'true':'false');
+   if (submitted) {
+    btn.disabled = true;
+    if (oi === q.answer) btn.classList.add('correct');
+    else if (answers[qi] === oi) btn.classList.add('wrong');
+   } else {
+    btn.onclick = () => {
+     answers[qi] = oi;
+     renderQuiz();
+    };
+   }
+   opts.appendChild(btn);
+  });
+  box.appendChild(opts);
+  if (submitted) {
+   const fb = document.createElement('div');
+   const ok = answers[qi] === q.answer;
+   fb.className = 'feedback ' + (ok ? 'good':'bad');
+   fb.textContent = (ok ? '✅ 정답! ':'❌ 오답 해설: ') + q.explain;
+   box.appendChild(fb);
+   if (!ok) {
+    const detail = document.createElement('div');
+    detail.className = 'feedback';
+    detail.style.background = '#f6f8fc';
+    detail.style.color = '#526175';
+    detail.textContent = '선택한 답: ' + q.wrong[answers[qi]];
+    box.appendChild(detail);
+   }
+  }
+  root.appendChild(box);
+ });
+ document.getElementById('checkBtn').disabled =
+  submitted || answers.includes(null);
+}
+
+function checkQuiz() {
+ if (submitted || answers.includes(null)) return;
+ submitted = true;
+ steps.quiz = true;
+ renderQuiz();
+ const score = answers.filter((a,i)=>a===questions[i].answer).length;
+ document.getElementById('quizResult').style.display = 'block';
+ document.getElementById('scoreEmoji').textContent =
+  score === 6 ? '🏆' : score >= 4 ? '🎯' : '📚';
+ document.getElementById('scoreTitle').textContent =
+  score === 6 ? '완벽한 분석력!' : score >= 4 ? '훌륭한 도전!' : '해설을 분석해 보세요!';
+ document.getElementById('scoreText').textContent =
+  `${questions.length}문제 중 ${score}문제 정답 · ${Math.round(score/questions.length*100)}점`;
+ const detail = document.getElementById('scoreDetail');
+ detail.innerHTML = '';
+ questions.forEach((q,i) => {
+  const d = document.createElement('div');
+  d.textContent = `${i+1}번 · ${answers[i]===q.answer?'정답':'오답'} · ${q.type}`;
+  detail.appendChild(d);
+ });
+ updateProgress();
+ document.getElementById('quizResult').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function resetQuiz() {
+ answers = Array(questions.length).fill(null);
+ submitted = false;
+ steps.quiz = false;
+ document.getElementById('quizResult').style.display = 'none';
+ renderQuiz();
+ updateProgress();
+ document.getElementById('quiz').scrollIntoView({behavior:'smooth'});
+}
+
+function markStep(name) {
+ steps[name] = true;
+ updateProgress();
+}
+function showWritingAnswers() {
+ document.getElementById('modelAnswers').style.display = 'block';
+ document.getElementById('modelAnswers').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+function finishLesson() {
+ if (!steps.quiz) {
+  alert('먼저 고난도 문법 퀴즈를 제출하고 채점해 주세요.');
+  document.getElementById('quiz').scrollIntoView({behavior:'smooth'});
+  return;
+ }
+ steps.finish = true;
+ updateProgress();
+ const score = answers.filter((a,i)=>a===questions[i].answer).length;
+ document.getElementById('finishText').textContent =
+  `객관식 ${score}/${questions.length}문제를 완료했습니다. 서술형 답안도 모범 답안과 비교해 문법과 의미를 점검해 보세요.`;
+ document.getElementById('finishResult').style.display = 'block';
+ document.getElementById('finishResult').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+function updateProgress() {
+ const count = Object.values(steps).filter(Boolean).length;
+ document.getElementById('progressBar').style.width = (count*25)+'%';
+ document.getElementById('progressPct').textContent = (count*25)+'% 완료';
+ document.getElementById('progressLabel').textContent =
+  steps.finish ? '모든 학습 단계 완료!' : `학습 진행 · ${count}/4단계`;
+}
+renderQuiz();
+updateProgress();
+</script>
+</body>
+</html>
